@@ -28,7 +28,7 @@ class UserManager(models.Manager):
             errors['password'] = 'Passwords do not match'
         
         return errors
-    
+
     def authenticate(self, email, password):
         users = self.filter(email=email)
         if not users:
@@ -40,12 +40,16 @@ class UserManager(models.Manager):
     def register(self, form):
         pw = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt()).decode()
         return self.create(
+            first_name = form['first_name'],
+            last_name = form['first_name'],
             email = form['email'],
             password = pw,
         )
 
 
 class User(models.Model):
+    first_name = models.CharField(max_length=45, default=True)
+    last_name = models.CharField(max_length=45, default=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
