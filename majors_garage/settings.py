@@ -38,17 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
-    
-    
-    'login', 
-]
-
-SITE_ID = 1
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-ACCOUNT_EMAIL_REQUIRED = True
+    'login',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,7 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
