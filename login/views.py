@@ -41,3 +41,21 @@ def home(request):
         'user': User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'home.html', context)
+
+def baseline_products(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    return render(request, 'baseline.html')
+
+def driver_products(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    return render(request, 'driver.html')
+
+def elite_products(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    return render(request, 'elite.html')
+
+def coming_soon(request):
+    return render(request, 'coming-soon.html')

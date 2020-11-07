@@ -1,9 +1,35 @@
 from django.db import models
+from django.conf import settings
 from django.contrib import messages
 import re
 import bcrypt
 
+CATEGORIES = (
+    ('Bline+', 'Baseline+'),
+    ('Dr', 'Driver'),
+    ('El', 'Elite')
+)
+
 # Create your models here.
+class Item(models.Model):
+    title = models.CharField(max_length=100)
+    price = models.FloatField()
+    category = models.CharField(choices=CATEGORIES, max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class OrderItem(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
+    purchased = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class UserManager(models.Manager):
     def validate(self, form):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
