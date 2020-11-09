@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.urls import reverse
 from django.contrib import messages
 from .models import *
+
+
 
 def index(request):
     return render(request, 'index.html')
@@ -26,6 +29,9 @@ def register(request):
 
 def login(request):
     if request.method == "GET":
+        return redirect('/')
+    if not User.objects.authenticate(request.POST['email'], request.POST['password']):
+        messages.error(request, 'Invalid Email/Password')
         return redirect('/')
     user = User.objects.get(email=request.POST['email'])
     request.session['user_id'] = user.id
@@ -61,3 +67,12 @@ def elite_products(request):
 def coming_soon(request):
     return render(request, 'coming-soon.html')
 
+def product_list_view(request):
+    allproducts = Products.objects.all()
+    context = {
+        'allproducts': allproducts
+    }
+    return render(request, 'driver.html', context)
+
+def checkout(request):
+    return render(request, 'checkout.html')

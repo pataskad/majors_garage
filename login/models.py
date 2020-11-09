@@ -11,22 +11,9 @@ CATEGORIES = (
 )
 
 # Create your models here.
-class Item(models.Model):
-    title = models.CharField(max_length=100)
-    price = models.FloatField()
-    category = models.CharField(choices=CATEGORIES, max_length=50)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class OrderItem(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(OrderItem)
-    purchased = models.BooleanField(default=False)
+class Product(models.Model):
+    name= models.CharField(max_length=100)
+    category= models.CharField(max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

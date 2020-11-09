@@ -11,5 +11,6 @@ urlpatterns = [
     path('driver', views.driver_products),
     path('elite', views.elite_products),
     path('coming-soon', views.coming_soon),
+    path('checkout', views.checkout),
     path('logout', views.logout),
 ]

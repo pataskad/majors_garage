@@ -24,6 +24,13 @@
         <div class="w-100 d-inline-block" style="text-align: center; margin-top: 30px;">
             <b style="font-size: 40px;">Welcome to Majors Garage!</b><br>
             <b style="font-size: 20px;">Please Register or Log in!</b>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
         <div class="w-25 d-inline-block" style="text-align: center; margin: 80px; margin-left: 300px; vertical-align: top;">
             <form action='/login' method='post'>
@@ -37,15 +44,8 @@
                 <button type="submit" class="btn btn-primary">Log in</button>
             </form>
         </div>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <div class="w-25 d-inline-block" style="text-align: center; margin: 80px;">
-            <form action='/register' class="was-validated" method='post'>
+            <form action='/register'  method='post'>
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" required class="form-control" id="first_name" name="first_name"  placeholder="First Name">
