@@ -1,10 +1,13 @@
+
 from django.shortcuts import render, redirect
 from django.conf import settings
-from django.urls import reverse
+
 from django.contrib import messages
 from .models import *
+from django.views.generic.base import TemplateView
 
-
+class HomePageView(TemplateView):
+    template_name='driver.html'
 
 def index(request):
     return render(request, 'index.html')
@@ -76,3 +79,6 @@ def product_list_view(request):
 
 def checkout(request):
     return render(request, 'checkout.html')
+
+def success(request):
+    return render(request, 'success.html')

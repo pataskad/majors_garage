@@ -50,14 +50,55 @@
                   <tr>
                     <th scope="col">Price</th>
                     <th scope="col">Track and Car</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Payment</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">$3.00</th>
                     <td>Homestead | NASCAR A | 20S4</td>
-                    <td><button class="btn btn-sm btn-primary" id="checkout-button">Buy</button></td>
+                    <td>
+                    <button
+                        style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                        id="checkout-button-price_1HlsC0IOxJKMqXnbQW0ijFQ4"
+                        role="link"
+                        type="button">
+                        Buy Now
+                    </button>
+                      
+                    <div id="error-message"></div>
+                      
+                    <script>
+                      (function() {
+                        var stripe = Stripe('pk_test_51HiXQAIOxJKMqXnbCKyLpyc9lkUFYoPQw30n0Wkr5CY1OmxGXq9tO0XDgNEc96FyESM2O8NFKkSqDHE3SoSo47bT00RK01VJcV');
+                      
+                        var checkoutButton = document.getElementById('checkout-button-price_1HlsC0IOxJKMqXnbQW0ijFQ4');
+                        checkoutButton.addEventListener('click', function () {
+                          // When the customer clicks on the button, redirect
+                          // them to Checkout.
+                          stripe.redirectToCheckout({
+                            lineItems: [{price: 'price_1HlsC0IOxJKMqXnbQW0ijFQ4', quantity: 1}],
+                            mode: 'payment',
+                            // Do not rely on the redirect to the successUrl for fulfilling
+                            // purchases, customers may not always reach the success_url after
+                            // a successful payment.
+                            // Instead use one of the strategies described in
+                            // https://stripe.com/docs/payments/checkout/fulfill-orders
+                            successUrl: window.location.protocol + '//localhost:5000/success',
+                            cancelUrl: window.location.protocol + '//localhost:5000/driver',
+                          })
+                          .then(function (result) {
+                            if (result.error) {
+                              // If `redirectToCheckout` fails due to a browser or network
+                              // error, display the localized error message to your customer.
+                              var displayError = document.getElementById('error-message');
+                              displayError.textContent = result.error.message;
+                            }
+                          });
+                        });
+                      })();
+                    </script>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -83,7 +124,7 @@
 
     <script type="text/javascript">
         // Create an instance of the Stripe object with your publishable API key
-        var stripe = Stripe('{{ stripe_public_key }}');
+        var stripe = Stripe('pk_test_51HiXQAIOxJKMqXnbCKyLpyc9lkUFYoPQw30n0Wkr5CY1OmxGXq9tO0XDgNEc96FyESM2O8NFKkSqDHE3SoSo47bT00RK01VJcV');
         var checkoutButton = document.getElementById('checkout-button');
 
         checkoutButton.addEventListener('click', function() {

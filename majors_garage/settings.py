@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    'login',
+    'login.apps.LoginConfig',
     ]
 
 MIDDLEWARE = [
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'majors_garage.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+DOMAIN_URL = 'http://localhost:5000/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -127,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' 
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
