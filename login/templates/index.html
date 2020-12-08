@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
   <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-
+<!--The intention is to have some kind of admin login to add new products and make the site essentially manageable without needing intense, active management by a skilled developer-->
 <div class="container-fluid bg-secondary" style="padding-top: 2px; padding-bottom: 2px;">
     <div class="shadow p-4 mb-4 bg-light" style="justify-content: center;">
         <nav class="navbar navbar-expand-xl navbar-light bg-light" style="justify-content: center;">
@@ -20,64 +20,66 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         </nav>
     </div>
-    <div class="container-fluid bg-light" style="height: 700px;">
-        <div class="w-100 d-inline-block" style="text-align: center; margin-top: 30px;">
-            <b style="font-size: 40px;">Welcome to Majors Garage!</b><br>
-            <b style="font-size: 20px;">Please Register or Log in!</b>
-            {% if messages %}
+    <div class="container-fluid bg-light" style="height: auto; padding: 15px;">
+        <div class="row">
+            <div class="col-12" style="text-align: center; margin-top: 30px; margin-bottom: 75px;">
+                <b style="font-size: 40px;">Welcome to Majors Garage!</b><br>
+                <b style="font-size: 20px;">Please Register or Log in!</b>
+            </div>
+            <div class="col-6">
+                {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
                     <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                     {% endfor %}
                 </ul>
-            {% endif %}
-        </div>
-        <div class="w-25 d-inline-block" style="text-align: center; margin: 80px; margin-left: 300px; vertical-align: top;">
-            <form action='/login' method='post'>
-                {% csrf_token %}
-                <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </form>
-        </div>
-        <div class="w-25 d-inline-block" style="text-align: center; margin: 80px;">
-            <form action='/register'  method='post'>
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" required class="form-control" id="first_name" name="first_name"  placeholder="First Name">
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                    <input type="text" required class="form-control" id="last_name" name="last_name" placeholder="First Name">
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                    <input type="email" required class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" required id="confirm" name='confirm' placeholder="Confirm Password">
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
+                {% endif %}
+                <form action='/login' style="width: 50%; text-align: center; margin: auto;" method='post'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" id="login-btn" class="btn btn-primary">Log in</button>
+                </form>
+            </div>
+            <div class="col-6">
+                <form action='/register' style="width: 50%; text-align: center; margin: auto;" method='post'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" required class="form-control" id="first_name" name="first_name"  placeholder="First Name">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" required class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" required class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" required id="confirm" name='confirm' placeholder="Confirm Password">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="shadow p-4 mb-4 bg-light" style="margin-top: 5px; margin-bottom: 5px;">
-        <div class="container-fluid bg-light" style="height: 50px;">
+        <div class="container-fluid bg-light" style="height: auto;">
                 <ul class="nav" style="justify-content: center;">
                     <li class="nav-item">
                     <a class="nav-link" href="#">Discord</a>
