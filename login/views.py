@@ -71,7 +71,7 @@ def coming_soon(request):
     return render(request, 'coming-soon.html')
 
 def product_list_view(request):
-    allproducts = Products.objects.all()
+    allproducts = Product.objects.all()
     context = {
         'allproducts': allproducts
     }
