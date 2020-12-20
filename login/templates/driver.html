@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <title>Majors Garage Driver</title>
@@ -54,9 +55,10 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for products in allproducts %}
                   <tr>
-                    <th scope="row">$3.00</th>
-                    <td>Homestead | NASCAR A | 20S4</td>
+                    <th scope="row">${{product.price}}</th>
+                    <td>product.name</td>
                     <td>
                     <button
                         style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
@@ -100,6 +102,7 @@
                     </script>
                     </td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
         </div>

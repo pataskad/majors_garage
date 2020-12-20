@@ -55,12 +55,20 @@ def home(request):
 def baseline_products(request):
     if 'user_id' not in request.session:
         return redirect('/')
-    return render(request, 'baseline.html')
+    blineproducts = Product.objects.filter(category='Baseline')
+    context = {
+        'blineproducts': blineproducts
+    }
+    return render(request, 'baseline.html', context)
 
 def driver_products(request):
     if 'user_id' not in request.session:
         return redirect('/')
-    return render(request, 'driver.html')
+    allproducts = Product.objects.filter(category='Driver')
+    context = {
+        'allproducts': allproducts
+    }
+    return render(request, 'driver.html', context)
 
 def elite_products(request):
     if 'user_id' not in request.session:
@@ -69,13 +77,6 @@ def elite_products(request):
 
 def coming_soon(request):
     return render(request, 'coming-soon.html')
-
-def product_list_view(request):
-    allproducts = Product.objects.all()
-    context = {
-        'allproducts': allproducts
-    }
-    return render(request, 'driver.html', context)
 
 def checkout(request):
     return render(request, 'checkout.html')
