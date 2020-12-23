@@ -60,16 +60,20 @@ def baseline_products(request):
 def driver_products(request):
     if 'user_id' not in request.session:
         return redirect('/')
-    allproducts = Product.objects.filter(category='Driver')
+    driverproducts = Product.objects.filter(category='Driver')
     context = {
-        'allproducts': allproducts
+        'driverproducts': driverproducts
     }
     return render(request, 'driver.html', context)
 
 def elite_products(request):
     if 'user_id' not in request.session:
         return redirect('/')
-    return render(request, 'elite.html')
+    eliteproducts = Product.objects.filter(category='Elite')
+    context = {
+        'eliteproducts': eliteproducts
+    }
+    return render(request, 'elite.html', context)
 
 def coming_soon(request):
     return render(request, 'coming-soon.html')

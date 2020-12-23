@@ -42,23 +42,21 @@
             </div>
         </nav>
     </div>
-    <div class="container-fluid bg-light" style="height: 750px;">
-        <div class="w-100 d-inline-block" style="text-align: center; margin-top: 30px;">
-            <b style="font-size: 40px;">Driver Tier</b><br>
-            <p style="font-size: 20px;">The Driver tier represents the standard tier setup that will be offered on a weekly basis!</p>
-            <table class="table table-striped">
+    <div class="container-fluid bg-light" style="height: 100%;">
+          <table class="table table-striped" style="text-align: center; width: 70%; margin-left: 15%;">
+              <h2 style="font-size: 40px; text-align: center; padding: 2rem;">Driver Tier</h2>
                 <thead>
                   <tr>
                     <th scope="col">Price</th>
-                    <th scope="col">Track and Car</th>
-                    <th scope="col">Payment</th>
+                    <th scope="col">Track | Car | Season</th>
+                    <th scope="col">Product Options</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for products in allproducts %}
+                    {% for product in driverproducts %}
                   <tr>
                     <th scope="row">${{product.price}}</th>
-                    <td>product.name</td>
+                    <td>{{product.name}} | <b>{{product.category}}</b></td>
                     <td>
                     <button
                         style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
@@ -104,8 +102,7 @@
                   </tr>
                   {% endfor %}
                 </tbody>
-              </table>
-        </div>
+            </table>
     </div>
     <div class="shadow p-4 mb-4 bg-light" style="margin-top: 5px; margin-bottom: 5px;">
         <div class="container-fluid bg-light" style="height: 50px;">
