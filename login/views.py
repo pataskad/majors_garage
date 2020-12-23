@@ -4,10 +4,6 @@ from django.conf import settings
 
 from django.contrib import messages
 from .models import *
-from django.views.generic.base import TemplateView
-
-class HomePageView(TemplateView):
-    template_name='driver.html'
 
 def index(request):
     return render(request, 'index.html')
